@@ -18,7 +18,7 @@ pear package
     
 svn tag 
 
-    svn checkout http://svn.symfony-project.com/plugins/fpFilePlugin/tags/fpFilePlugin-1.0.0
+    svn checkout http://svn.symfony-project.com/plugins/fpFilePlugin/tags/fpFilePlugin-1.0.1
 
 dev version:
 
