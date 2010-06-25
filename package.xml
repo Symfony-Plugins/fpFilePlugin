@@ -13,7 +13,7 @@
   <date>2010-06-25</date>
   <time>14:00:00</time>
   <version>
-    <release>1.0.0</release>
+    <release>1.0.1</release>
     <api>1.2.0</api>
   </version>
   <stability>
@@ -42,8 +42,28 @@
         </dir>
         <file role="data" name="fpFileException.php" />
       </dir>
-		  <file role="data" name="LICENSE" />
-		  <file role="data" name="README" />
+      <dir name="test">
+        <dir name="phpunit">
+          <dir name="fixtures">
+            <dir name="common" />
+            <dir name="utils">
+              <file role="data" name="linux_rulez.gif.zip" />
+            </dir>
+          </dir>
+          <dir name="utils">
+            <file role="data" name="fpFileTestCase.php" />
+            <file role="data" name="fpFolderTestCase.php" />
+            <file role="data" name="fpNotExistFileTestCase.php" />
+            <file role="data" name="fpPublicFileTestCase.php" />
+	        <file role="data" name="fpPublicFolderTestCase.php" />
+	        <file role="data" name="fpTempFolderTestCase.php" />
+	        <file role="data" name="fpZipFileTestCase.php" />
+          </dir>
+          <file role="data" name="fpFileRootTestSuite.php" />
+        </dir>
+      </dir>
+	  <file role="data" name="LICENSE" />
+	  <file role="data" name="README" />
     </dir>
   </contents>
   <dependencies>
@@ -65,6 +85,22 @@
   </dependencies>
   <phprelease />
   <changelog>
+    <release>
+      <version>
+        <release>1.0.1</release>
+          <api>1.2.0</api>
+        </version>
+        <stability>
+         <release>stable</release>
+         <api>1.2.0</api>
+        </stability>
+        <license uri="http://www.symfony-project.com/license">MIT license</license>
+        <date>2010-06-25</date>
+        <license>MIT</license>
+        <notes>
+          * add test to the package 
+        </notes>
+    </release>
     <release>
       <version>
         <release>1.0.0</release>

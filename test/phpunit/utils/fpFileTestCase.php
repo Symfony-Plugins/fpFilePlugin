@@ -7,14 +7,15 @@ class fpFileTestCase extends sfBasePhpunitTestCase
   
   protected function _start()
   { 
-    $test_dir = sfConfig::get('sf_cache_dir').'/test/phpunit-tmp'; 
+    $test_dir = sfConfig::get('sf_plugin_test_dir').'/temp/'.__CLASS__; 
     file_exists($test_dir) || mkdir($test_dir, 0777, true);
     file_exists($test_dir.'/linux_rulez.gif.zip') && unlink($test_dir.'/linux_rulez.gif.zip');
     file_exists($test_dir.'/copied.zip') && unlink($test_dir.'/copied.zip');
     file_exists($test_dir.'/movied.zip') && unlink($test_dir.'/movied.zip');
-    
-    
-    copy($this->fixture()->getDirPackage().'/linux_rulez.gif.zip', $test_dir.'/linux_rulez.gif.zip');
+        
+    copy(
+      $this->fixture()->getDirPackage().'/linux_rulez.gif.zip', 
+      $test_dir.'/linux_rulez.gif.zip');
     
     $this->_test_file = $test_dir.'/linux_rulez.gif.zip';
   }

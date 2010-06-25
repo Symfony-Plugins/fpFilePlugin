@@ -8,11 +8,15 @@ class fpPublicFolderTestCase extends sfBasePhpunitTestCase
   
   protected function _start()
   {
-    $this->_relativePath = __CLASS__;
-    $this->_absolutePath = sfConfig::get('app_web_dir').'/'.$this->_relativePath;
-    if (!file_exists($this->_absolutePath)) {
-      mkdir($this->_absolutePath);
-    }
+    $tempDir = sfConfig::get('sf_plugin_test_dir').'/temp/'.__CLASS__; 
+    file_exists($tempDir) || mkdir($tempDir, 0777, true);
+    
+    sfConfig::set('sf_web_dir', $tempDir);
+    sfConfig::set('app_web_dir', $tempDir);
+    
+    $this->_relativePath = 'relativeDir';
+    $this->_absolutePath = $tempDir.'/'.$this->_relativePath;
+    !file_exists($this->_absolutePath) && mkdir($this->_absolutePath);
   }
   
   protected function _end()
@@ -63,8 +67,8 @@ class fpPublicFolderTestCase extends sfBasePhpunitTestCase
    */
   public function testGetUrl()
   {
-    $folder = new fpPublicFolder();
+    $folder = new fpPublicFolder($this->_absolutePath);
     
-    $this->assertEquals('/test', $folder->getUrl());
+    $this->assertEquals("/$this->_relativePath", $folder->getUrl());
   }
 }

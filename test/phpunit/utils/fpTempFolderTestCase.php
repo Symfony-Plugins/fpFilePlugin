@@ -16,7 +16,7 @@ class fpTempFolderTestCase extends sfBasePhpunitTestCase
   /**
    * @depends testTempFolder
    */
-  public function testTwoTempDirAreDifferent(TempFolder $tmp_folder)
+  public function testTwoTempDirAreDifferent(fpTempFolder $tmp_folder)
   {
     $tmp_folder2 = new fpTempFolder();
     $this->assertNotEquals($tmp_folder->getPath(), $tmp_folder2->getPath());

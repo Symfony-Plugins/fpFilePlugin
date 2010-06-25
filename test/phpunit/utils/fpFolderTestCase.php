@@ -8,8 +8,7 @@ class fpFolderTestCase extends sfBasePhpunitTestCase
 
   protected function _start()
   {
-    $this->_base = sfConfig::get('sf_cache_dir').'/test/phpunit-tmp/folder';
-
+    $this->_base = sfConfig::get('sf_plugin_test_dir').'/temp/'.__CLASS__; 
     file_exists($this->_base) || mkdir($this->_base, 0777, true);
 
     file_exists($this->_base.'/folder/sub') && rmdir($this->_base.'/folder/sub');

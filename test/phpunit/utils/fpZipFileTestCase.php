@@ -31,7 +31,7 @@ class fpZipFileTestCase extends sfBasePhpunitTestCase
   /**
    * @depends testFileHasValidExtension
    */
-  public function testFileCanBeExtracted(ZipFile $file)
+  public function testFileCanBeExtracted(fpZipFile $file)
   {
     $test_dir = dirname($this->_test_file);
     
