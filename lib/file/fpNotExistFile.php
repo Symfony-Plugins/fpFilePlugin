@@ -26,6 +26,6 @@ class fpNotExistFile extends fpFile
   
   protected function _getPath()
   {
-    throw new LogicException('This instance `'.__CLASS__.'` used in case of file does not exists. So any methods accept exists will throw this error.'); 
+    throw new fpFileException('This instance `'.__CLASS__.'` used in case of file does not exists. So any methods accept exists will throw this error.'); 
   }
 }

@@ -21,13 +21,13 @@ class fpFileTestCase extends sfBasePhpunitTestCase
   
   public function testObjectCanBeCreatedForExistFile()
   {
-    return new File($this->_test_file);
+    return new fpFile($this->_test_file);
   } 
   
   /**
    * @depends testObjectCanBeCreatedForExistFile
    */
-  public function testFileCanBeCopied(File $file)
+  public function testFileCanBeCopied(fpFile $file)
   {    
     $test_dir = dirname($this->_test_file);
     
@@ -35,7 +35,7 @@ class fpFileTestCase extends sfBasePhpunitTestCase
     
     $this->assertTrue(file_exists($test_dir.'/copied.zip'));
     
-    $this->assertType('File', $copyied);
+    $this->assertType('fpFile', $copyied);
     $this->assertTrue($copyied->exists());
     $this->assertEquals($test_dir.'/copied.zip', $copyied->getPath());
   }
@@ -43,7 +43,7 @@ class fpFileTestCase extends sfBasePhpunitTestCase
   /**
    * @depends testObjectCanBeCreatedForExistFile
    */
-  public function testFileCanBeMovied(File $file)
+  public function testFileCanBeMovied(fpFile $file)
   {
     $test_dir = dirname($this->_test_file);
     

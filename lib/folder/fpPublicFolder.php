@@ -10,7 +10,7 @@ class fpPublicFolder extends fpFolder
     $resolvedPath || $resolvedPath = $this->_resolveAsRelativeAppWebDirPath($path);
 
     if (!$resolvedPath) {
-      throw new Exception('The path `'.$path.'` is not a valid public folder. The folder should be sub a subdirectory of `'.$this->_getSfWebDir().'`');
+      throw new fpFileException('The path `'.$path.'` is not a valid public folder. The folder should be sub a subdirectory of `'.$this->_getSfWebDir().'`');
     }
 
     return parent::__construct($resolvedPath);
@@ -30,10 +30,10 @@ class fpPublicFolder extends fpFolder
   protected function _getAppWebDir()
   {
     if (!$path = sfConfig::get('app_web_dir')) {
-      throw new Exception('a parameter `app_web_dir` should be defined in app.yml');
+      throw new fpFileException('a parameter `app_web_dir` should be defined in app.yml');
     }
     if (strpos($path, $this->_getSfWebDir()) === false) {
-      throw new Exception('a `app_web_dir` ('.$path.') dir should be a sub folder of `sf_web_dir` ('.$this->_getSfWebDir().')');
+      throw new fpFileException('a `app_web_dir` ('.$path.') dir should be a sub folder of `sf_web_dir` ('.$this->_getSfWebDir().')');
     }
     
     return $path;

@@ -3,17 +3,17 @@
 class fpPublicFileTestCase extends sfBasePhpunitTestCase
 {
   /**
-   * @expectedException Exception
+   * @expectedException fpFileException
    */
   public function testGetUrlInvalidPublicPath()
   {
-    $file = new PublicFile(sfConfig::get('sf_root_dir'));
+    $file = new fpPublicFile(sfConfig::get('sf_root_dir'));
     $file->getUrl();
   }
   
   public function testConstructValidAbsolutePublicPath()
   {
-    $file = new PublicFile(sfConfig::get('sf_web_dir').'/index.php');
+    $file = new fpPublicFile(sfConfig::get('sf_web_dir').'/index.php');
     
     $this->assertEquals(sfConfig::get('sf_web_dir').'/index.php', $file->getPath());
     $this->assertEquals('/index.php', $file->getUrl());
@@ -21,7 +21,7 @@ class fpPublicFileTestCase extends sfBasePhpunitTestCase
   
   public function testConstructValidRelativePublicPath()
   {
-    $file = new PublicFile('index.php');
+    $file = new fpPublicFile('index.php');
     
     $this->assertEquals(sfConfig::get('sf_web_dir').'/index.php', $file->getPath());
     $this->assertEquals('/index.php', $file->getUrl());

@@ -12,8 +12,6 @@ class fpFile
    * 
    * @param string $path
    * 
-   * @throws Exception if file is not exist on the file system
-   * 
    * @return void
    */
   public function __construct($path)
@@ -32,30 +30,30 @@ class fpFile
   }
   
   /**
-   * @return Folder
+   * @return fpFolder
    */
   public function getFolder()
   {
-    return new Folder(dirname($this->getPath()));
+    return new fpFolder(dirname($this->getPath()));
   }
 
   /**
    * 
    * @param string $path to copy to
    * 
-   * @throws Exception if file is not exist any more
-   * @throws Excpetion if the file under the target pass already exist
+   * @throws fpFileException if file is not exist any more
+   * @throws fpFileException if the file under the target pass already exist
    * 
-   * @return File for the copy of the file
+   * @return fpFile for the copy of the file
    */
   public function copy($path)
   {
     if(file_exists($path)) {
-      throw new Exception($path . '; File already exists');
+      throw new fpFileException($path . '; File already exists');
     }
     
     if (!is_dir(dirname($path))) {
-      new Folder(dirname($path));
+      new fpFolder(dirname($path));
     }  
     
     copy($this->_getPath(), $path);
@@ -68,15 +66,15 @@ class fpFile
    * 
    * @param string $path
    * 
-   * @throws Exception if file is not exist any more
-   * @throws Excpetion if the file under the target pass already exist
+   * @throws fpFileException if file is not exist any more
+   * @throws fpFileException if the file under the target pass already exist
    * 
    * @return File itself poited to the new location of the file
    */
   public function move($path)
   {
     if(file_exists($path)) {
-      throw new Exception($path . '; Already exists');
+      throw new fpFileException($path . '; Already exists');
     }
 
     rename($this->_getPath(), $path);
@@ -86,7 +84,8 @@ class fpFile
   }
 
   /**
-   * @throws Exception if file is not exist any more
+   * 
+   * @return fpFile
    */
   public function remove()
   {
@@ -121,7 +120,7 @@ class fpFile
   protected function _getPath()
   {
     if (!$this->exists()) {
-      throw new Exception('The file `'.$this->_path.'` is not exist any more. Maybe you removed it');
+      throw new fpFileException('The file `'.$this->_path.'` is not exist any more. Maybe you removed it');
     }
     
     return $this->_path;

@@ -17,7 +17,7 @@ class fpPublicFile extends fpFile
   public function getUrl()
   {
     if (strpos($this->getPath(), sfConfig::get('sf_web_dir')) === false) {      
-      throw new Exception('The file `'.$this->getPath().'` is not a valid public file. The file should be in sub subdirectory of `'.sfConfig::get('sf_web_dir').'`');
+      throw new fpFileException('The file `'.$this->getPath().'` is not a valid public file. The file should be in sub subdirectory of `'.sfConfig::get('sf_web_dir').'`');
     }
     
     return str_replace(sfConfig::get('sf_web_dir'), '', $this->getPath());
@@ -28,6 +28,6 @@ class fpPublicFile extends fpFile
    */
   public function getFolder()
   {
-    return new PublicFolder(dirname($this->getPath()));
+    return new fpPublicFolder(dirname($this->getPath()));
   }
 }

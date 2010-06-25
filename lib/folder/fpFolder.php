@@ -17,7 +17,7 @@ class fpFolder extends fpFile implements IteratorAggregate
     {
       if(!mkdir($this->_path, 0777, true))
       {
-        throw new Exception($this->_path . '; Does not create folder' );
+        throw new fpFileException($this->_path . '; Does not create folder' );
       }
     }
 
@@ -34,10 +34,10 @@ class fpFolder extends fpFile implements IteratorAggregate
   public function copy($target)
   {
     if (is_string($target)) {
-      $target = new Folder($target); 
+      $target = new fpFolder($target); 
     }
-    if (!$target instanceof Folder) {
-      throw new Exception('Invalid first parameter should be either string path or instance of `Folder`'); 
+    if (!$target instanceof fpFolder) {
+      throw new fpFileException('Invalid first parameter should be either string path or instance of `Folder`'); 
     }
 
     if ($dh = opendir($this->_getPath()))
@@ -50,10 +50,10 @@ class fpFolder extends fpFile implements IteratorAggregate
         
         $filePath = $this->_getPath() . '/' . $file;
         if(is_dir($filePath)) {
-          $folder = new Folder($filePath);
+          $folder = new fpFolder($filePath);
           $folder->copy($target . '/' . $file);
         } else {
-          $aFile = new File( $filePath );
+          $aFile = new fpFile( $filePath );
           $aFile->copy($target . '/' . $file);
         }
       }
@@ -80,7 +80,7 @@ class fpFolder extends fpFile implements IteratorAggregate
   public function truncate()
   {
     if(!$this->exists()) {
-      throw new Exception($this->_getPath() . '; Folder not exists');
+      throw new fpFileException($this->_getPath() . '; Folder not exists');
     }
 
     $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::CHILD_FIRST);

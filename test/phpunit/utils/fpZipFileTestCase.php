@@ -16,16 +16,16 @@ class fpZipFileTestCase extends sfBasePhpunitTestCase
   }
   
   /**
-   * @expectedException Exception
+   * @expectedException fpFileException
    */
   public function testFileHasInvalidExtension()
   {
-    new ZipFile(__FILE__);
+    new fpZipFile(__FILE__);
   }
   
   public function testFileHasValidExtension()
   {
-    return new ZipFile($this->_test_file);
+    return new fpZipFile($this->_test_file);
   }
   
   /**

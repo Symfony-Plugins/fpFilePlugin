@@ -5,26 +5,26 @@ class fpNotExistFileTestCase extends sfBasePhpunitTestCase
 {
   public function testConstructNotRequierAnyParameters()
   {
-    new NotExistFile();
+    new fpNotExistFile();
   }
   
   public function testExistAlwaysReturnsFalse()
   {
-    $file = new NotExistFile();
+    $file = new fpNotExistFile();
     $this->assertFalse($file->exists());
     
-    $file = new NotExistFile($this->fixture()->getFilePackage('linux_rulez.gif.zip'));
+    $file = new fpNotExistFile($this->fixture()->getFilePackage('linux_rulez.gif.zip'));
     $this->assertFalse($file->exists());
   }
   
   /**
    * @dataProvider providerFileMethods
    * 
-   * @expectedException LogicException
+   * @expectedException fpFileException
    */
   public function testOtherMethodsWillThrowAnException($method, $args)
   {
-    $file = new NotExistFile();
+    $file = new fpNotExistFile();
     
     call_user_func_array(array($file, $method), $args);
   }
@@ -40,7 +40,7 @@ class fpNotExistFileTestCase extends sfBasePhpunitTestCase
   
   public function testRemoveDoNothing()
   {
-    $file = new NotExistFile();
+    $file = new fpNotExistFile();
     $result = $file->remove();
     
     $this->assertSame($file, $result);
@@ -48,7 +48,7 @@ class fpNotExistFileTestCase extends sfBasePhpunitTestCase
 
   public function testChmodDoNothing()
   {
-    $file = new NotExistFile();
+    $file = new fpNotExistFile();
     $result = $file->chmod(0777);
     
     $this->assertSame($file, $result);

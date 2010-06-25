@@ -18,7 +18,7 @@ class fpPublicFolderTestCase extends sfBasePhpunitTestCase
   protected function _end()
   {
     if (file_exists($this->_absolutePath)) {
-      $f = new Folder($this->_absolutePath);
+      $f = new fpFolder($this->_absolutePath);
       $f->remove();
     }
   }
@@ -29,7 +29,7 @@ class fpPublicFolderTestCase extends sfBasePhpunitTestCase
     $expectedFolder = sfConfig::get('app_web_dir').'/'.$expectedFolderName;
     file_exists($expectedFolder) && rmdir($expectedFolder);
     
-    $folder = new PublicFolder($expectedFolderName);
+    $folder = new fpPublicFolder($expectedFolderName);
     
     $this->assertEquals($expectedFolder, $folder->getPath());
     $this->assertTrue(file_exists($expectedFolder));
@@ -39,21 +39,21 @@ class fpPublicFolderTestCase extends sfBasePhpunitTestCase
   
   public function testConstructValidAbsolutePath()
   {     
-    $folder = new PublicFolder($this->_absolutePath);
+    $folder = new fpPublicFolder($this->_absolutePath);
     
     $this->assertEquals($this->_absolutePath, $folder->getPath());
   }
   
   public function testConstructValidAppRelativePublicPath()
   {
-    $folder = new PublicFolder($this->_relativePath);
+    $folder = new fpPublicFolder($this->_relativePath);
     
     $this->assertEquals($this->_absolutePath, $folder->getPath());
   }
   
   public function testConstructForEmptyPathReturnsRootPublicFolder()
   {     
-    $folder = new PublicFolder();
+    $folder = new fpPublicFolder();
     
     $this->assertEquals(sfConfig::get('app_web_dir'), $folder->getPath());
   }
@@ -63,7 +63,7 @@ class fpPublicFolderTestCase extends sfBasePhpunitTestCase
    */
   public function testGetUrl()
   {
-    $folder = new PublicFolder();
+    $folder = new fpPublicFolder();
     
     $this->assertEquals('/test', $folder->getUrl());
   }

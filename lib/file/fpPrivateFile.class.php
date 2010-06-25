@@ -5,7 +5,7 @@ class fpPrivateFile extends fpFile
   public function __construct($path)
   {
     if (strpos($path, sfConfig::get('sf_web_dir')) !== false) {
-      throw new LogicException('The private file `'.$path.'` cannot be stored in public folder `'.sfConfig::get('sf_web_dir').'`. It is very unsecure');
+      throw new fpFileException('The private file `'.$path.'` cannot be stored in public folder `'.sfConfig::get('sf_web_dir').'`. It is very unsecure');
     }
     
     return parent::__construct($path);
@@ -27,18 +27,18 @@ class fpPrivateFile extends fpFile
   {
     $linkName = $this->_generatePublicLinkName();
 
-    $link = new PublicFile(
+    $link = new fpPublicFile(
       sfConfig::get('app_web_dir').'/static/temporary/'.$linkName);
       
     if ($link->exists()) {
-      throw new Exception('The file with the same name as generated link `'.$link.'` exist. This would never happend or cron task does not clean downlaod links periodicaly');
+      throw new fpFileException('The file with the same name as generated link `'.$link.'` exist. This would never happend or cron task does not clean downlaod links periodicaly');
     }
     
   //  $link->getFolder()->chmod(0777, true);
     chdir($link->getFolder());
     
     if (!@symlink($this, $link)) {
-      throw new Exception('Cannot create a symlink `'.$link.'` to the publication `'.$this.'`');
+      throw new fpFileException('Cannot create a symlink `'.$link.'` to the publication `'.$this.'`');
     }
     
     //$link->chmod(0666);

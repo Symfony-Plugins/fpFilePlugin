@@ -23,7 +23,7 @@ class fpFolderTestCase extends sfBasePhpunitTestCase
   {
     $this->assertFalse(file_exists($this->_base . '/folder'));
 
-    $folder = new Folder($this->_base . '/folder');
+    $folder = new fpFolder($this->_base . '/folder');
     $this->assertTrue(file_exists($this->_base . '/folder'));
   }
 
@@ -31,7 +31,7 @@ class fpFolderTestCase extends sfBasePhpunitTestCase
   {
     $this->assertFalse(file_exists($this->_base . '/folder'));
 
-    $folder = new Folder($this->_base . '/folder');
+    $folder = new fpFolder($this->_base . '/folder');
     $this->assertTrue(file_exists($this->_base . '/folder'));
 
     $folder->remove();
@@ -42,8 +42,8 @@ class fpFolderTestCase extends sfBasePhpunitTestCase
   public function testHas()
   {
 
-    $folder = new Folder($this->_base . '/folder');
-    $sub = new Folder($this->_base . '/folder/sub');
+    $folder = new fpFolder($this->_base . '/folder');
+    $sub = new fpFolder($this->_base . '/folder/sub');
 
     $this->assertTrue(file_exists($this->_base . '/folder/sub'));
     $this->assertTrue($folder->has('sub'));
@@ -52,7 +52,7 @@ class fpFolderTestCase extends sfBasePhpunitTestCase
 
   public function testGetPath()
   {
-    $folder = new Folder($this->_base . '/folder');
+    $folder = new fpFolder($this->_base . '/folder');
     $this->assertTrue(file_exists($folder->getPath()));
   }
 
@@ -61,10 +61,10 @@ class fpFolderTestCase extends sfBasePhpunitTestCase
     $this->assertFalse(file_exists($this->_base . '/folder'));
     $this->assertFalse(file_exists($this->_base . '/folder2'));
 
-    $folder = new Folder($this->_base . '/folder');
-    $sub = new Folder($this->_base . '/folder/sub');
+    $folder = new fpFolder($this->_base . '/folder');
+    $sub = new fpFolder($this->_base . '/folder/sub');
 
-    $folder2 = new Folder($this->_base . '/folder2');
+    $folder2 = new fpFolder($this->_base . '/folder2');
 
     $folder->copy($folder2);
 
@@ -78,7 +78,7 @@ class fpFolderTestCase extends sfBasePhpunitTestCase
     $this->assertFalse(file_exists($this->_base . '/folder'));
     $this->assertFalse(file_exists($this->_base . '/folder2'));
 
-    $folder = new Folder($this->_base . '/folder');
+    $folder = new fpFolder($this->_base . '/folder');
     $folder->move($this->_base . '/folder2');
     
     $this->assertFalse(file_exists($this->_base . '/folder'));
@@ -90,15 +90,13 @@ class fpFolderTestCase extends sfBasePhpunitTestCase
   {
     $this->assertFalse(file_exists($this->_base . '/folder'));
 
-    $folder = new Folder($this->_base . '/folder');
-    $sub = new Folder($this->_base . '/folder/sub');
+    $folder = new fpFolder($this->_base . '/folder');
+    $sub = new fpFolder($this->_base . '/folder/sub');
     
     $this->assertTrue(file_exists($this->_base . '/folder/sub'));
     
     $folder->truncate();
     
-    $this->assertFalse(file_exists($this->_base . '/folder/sub'));
-    
-  }
-  
+    $this->assertFalse(file_exists($this->_base . '/folder/sub')); 
+  } 
 }
